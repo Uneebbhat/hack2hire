@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/logo";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
 import { MobileNav } from "@/components/mobile-nav";
