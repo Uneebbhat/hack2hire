@@ -15,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Building, Code, Terminal, Users } from "lucide-react";
+import { Header } from "@/components/header";
 
 const SPONSORS = [
   { src: "/devsinc.png", alt: "Devsinc", href: "https://devsinc.com" },
@@ -33,6 +34,8 @@ const SPONSORS = [
 export default function HomePage() {
   return (
     <>
+      <Header />
+
       {/* Hero Section */}
       <main>
         <section className="relative overflow-hidden">
