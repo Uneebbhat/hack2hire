@@ -11,12 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import {
-  LayoutDashboardIcon,
-  CommandIcon,
-  BriefcaseBusiness,
-  Terminal,
-} from "lucide-react";
+import { LayoutDashboardIcon, BriefcaseBusiness, Terminal } from "lucide-react";
 import Link from "next/link";
 
 const data = {
@@ -28,7 +23,7 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/dashbaord",
+      url: "/dashboard",
       icon: <LayoutDashboardIcon />,
     },
     {
