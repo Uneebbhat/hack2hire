@@ -2,24 +2,24 @@
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
 import { Button } from "@/components/ui/button";
-import { MobileNav } from "@/components/mobile-nav";
+// import { MobileNav } from "@/components/mobile-nav";
 import { Terminal } from "lucide-react";
 import Link from "next/link";
 
-export const navLinks = [
-  {
-    label: "Features",
-    href: "#",
-  },
-  {
-    label: "Pricing",
-    href: "#",
-  },
-  {
-    label: "About",
-    href: "#",
-  },
-];
+// export const navLinks = [
+//   {
+//     label: "Features",
+//     href: "#",
+//   },
+//   {
+//     label: "Pricing",
+//     href: "#",
+//   },
+//   {
+//     label: "About",
+//     href: "#",
+//   },
+// ];
 
 export function Header() {
   const scrolled = useScroll(10);
@@ -42,17 +42,21 @@ export function Header() {
           Hack2Hire
         </Link>
         <div className="hidden items-center gap-2 md:flex">
-          {navLinks.map((link) => (
+          {/* {navLinks.map((link) => (
             <Button asChild key={link.label} size="sm" variant="ghost">
               <a href={link.href}>{link.label}</a>
             </Button>
-          ))}
-          <Button size="sm" variant="outline">
-            Sign In
-          </Button>
-          <Button size="sm">Get Started</Button>
+              ))} */}
         </div>
-        <MobileNav />
+        <div className="flex items-center gap-2">
+          <Button size="sm" variant="outline" asChild>
+            <Link href={"/login"}>Sign In</Link>
+          </Button>
+          <Button size="sm" asChild>
+            <Link href={"/signup"}>Get Started</Link>
+          </Button>
+        </div>
+        {/* <MobileNav /> */}
       </nav>
     </header>
   );
