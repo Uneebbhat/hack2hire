@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { CalendarDays, Clock3 } from "lucide-react";
+import { CalendarDays, Clock3, VerifiedIcon } from "lucide-react";
 import { Badge } from "../ui/badge";
 
 export default function JobCard() {
@@ -16,9 +16,15 @@ export default function JobCard() {
                 <Badge variant={"outline"}>3 Spots</Badge>
               </div>
 
-              <h2 className="mt-4 text-2xl font-semibold tracking-tight">
-                Scalable Microservices Orchestration
-              </h2>
+              <div>
+                <h2 className="mt-4 text-2xl font-semibold tracking-tight">
+                  Scalable Microservices Orchestration
+                </h2>
+                <Badge>
+                  <VerifiedIcon />
+                  Applied
+                </Badge>
+              </div>
 
               <p className="mt-4 max-w-4xl text-muted-foreground">
                 Design a system that can handle dynamic scaling of microservices
