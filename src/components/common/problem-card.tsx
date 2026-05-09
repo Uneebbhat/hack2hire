@@ -2,8 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { CalendarDays, Clock3, VerifiedIcon } from "lucide-react";
 import { Badge } from "../ui/badge";
+import Link from "next/link";
 
-export default function JobCard() {
+export default function ProblemCard() {
   return (
     <>
       <Card>
@@ -56,7 +57,9 @@ export default function JobCard() {
             </div>
           </div>
 
-          <Button className="rounded-full w-full md:w-fit">View Details</Button>
+          <Button className="rounded-full w-full md:w-fit">
+            <Link href={"/problem/1"}>View Details</Link>
+          </Button>
         </CardFooter>
       </Card>
     </>

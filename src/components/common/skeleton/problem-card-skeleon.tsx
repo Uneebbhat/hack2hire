@@ -1,7 +1,7 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function JobCardSkeleton() {
+export default function ProblemCardSkeleton() {
   return (
     <Card>
       <CardContent>
