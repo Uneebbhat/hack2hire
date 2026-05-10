@@ -3,7 +3,7 @@ import useFormHandler from "@/hooks/useFormhandler";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 import { signup } from "../../services/auth-service";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { HandleOnSubmit } from "@/types/form-types";
 
 export interface ISignupFormData {
@@ -14,7 +14,7 @@ export interface ISignupFormData {
 }
 
 const useSignup = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const { formData, setFormData, loading, setLoading, handleOnChange } =
     useFormHandler<ISignupFormData>({
       name: "",
@@ -79,7 +79,7 @@ const useSignup = () => {
         password: "",
       });
 
-      // router.push("/onboarding");
+      router.push("/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.error || error.message);

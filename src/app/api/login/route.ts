@@ -1,4 +1,4 @@
-import UserLoginSchema from "@/app/schema/user-login-schema.schema";
+import UserLoginSchema from "@/features/(auth)/schema/user-login-schema.schema";
 import UserDTO from "@/dto/user-dto.dto";
 import { generateAccessToken } from "@/helper/generateToken";
 import { comparePassword } from "@/helper/passwordHashing";

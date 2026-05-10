@@ -6,20 +6,20 @@ import { Button } from "@/components/ui/button";
 import { Terminal } from "lucide-react";
 import Link from "next/link";
 
-// export const navLinks = [
-//   {
-//     label: "Features",
-//     href: "#",
-//   },
-//   {
-//     label: "Pricing",
-//     href: "#",
-//   },
-//   {
-//     label: "About",
-//     href: "#",
-//   },
-// ];
+export const navLinks = [
+  {
+    label: "Features",
+    href: "#",
+  },
+  {
+    label: "Pricing",
+    href: "#",
+  },
+  {
+    label: "About",
+    href: "#",
+  },
+] as const;
 
 export function Header() {
   const scrolled = useScroll(10);

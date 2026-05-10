@@ -5,7 +5,7 @@ import { HandleOnSubmit } from "@/types/form-types";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 import { login } from "../../services/auth-service";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export interface ILoginFormData {
   email: string;
@@ -13,7 +13,7 @@ export interface ILoginFormData {
 }
 
 const useLogin = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const { formData, setFormData, loading, setLoading, handleOnChange } =
     useFormHandler<ILoginFormData>({
       email: "",
@@ -62,7 +62,7 @@ const useLogin = () => {
         password: "",
       });
 
-      // router.push("/dashboard");
+      router.push("/dashboard");
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.error || error.message);

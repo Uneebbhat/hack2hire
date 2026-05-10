@@ -1,4 +1,4 @@
-import UserSignupSchema from "@/app/schema/user-signup-schema.schema";
+import UserSignupSchema from "@/features/(auth)/schema/user-signup-schema.schema";
 import UserDTO from "@/dto/user-dto.dto";
 import { generateAccessToken } from "@/helper/generateToken";
 import { hashPassword } from "@/helper/passwordHashing";
@@ -26,6 +26,24 @@ export async function POST(req: NextRequest) {
     }
 
     const { name, email, password, username } = validateBody.data;
+
+    const usernameAlreadyTaken = await prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+    if (usernameAlreadyTaken) {
+      return NextResponse.json<APIResponse>(
+        {
+          success: false,
+          status: 409,
+          error: "Username already taken",
+        },
+        {
+          status: 409,
+        },
+      );
+    }
 
     const existingUser = await prisma.user.findUnique({
       where: {
