@@ -71,7 +71,7 @@ export default function ProblemDetails() {
         <CardFooter className="border-t">
           <div className="flex items-center gap-2 text-sm text-red-500">
             <CalendarDays className="h-4 w-4" />
-            Submission closes March 30, 2026 at 12:00 PM
+            Submission closes March 30, 2026
           </div>
         </CardFooter>
       </Card>
