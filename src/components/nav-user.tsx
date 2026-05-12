@@ -16,12 +16,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import useLogout from "@/features/(auth)/logout/hooks/useLogout";
 import {
   EllipsisVerticalIcon,
   CircleUserRoundIcon,
   LogOutIcon,
-  SettingsIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 export function NavUser({
   user,
@@ -33,6 +34,7 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const { handleLogout } = useLogout();
 
   return (
     <SidebarMenu>
@@ -78,17 +80,15 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <CircleUserRoundIcon />
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <SettingsIcon />
-                Settings
-              </DropdownMenuItem>
+              <Link href={"/profile/umar"}>
+                <DropdownMenuItem>
+                  <CircleUserRoundIcon />
+                  Profile
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">
+            <DropdownMenuItem variant="destructive" onClick={handleLogout}>
               <LogOutIcon />
               Log out
             </DropdownMenuItem>

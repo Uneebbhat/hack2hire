@@ -3,6 +3,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { CalendarDays, Clock3, VerifiedIcon } from "lucide-react";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
+import levelBadge from "@/utils/levelBadge";
 
 export default function ProblemCard() {
   return (
@@ -13,8 +14,8 @@ export default function ProblemCard() {
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge variant={"outline"}>TECHCORP SOLUTIONS</Badge>
-
-                <Badge variant={"outline"}>3 Spots</Badge>
+                {/* Usage example of levelBadge: */}
+                {levelBadge("expert")}
               </div>
 
               <div>

@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -22,16 +21,20 @@ export default function ProfileSidebar({ username }: ProfileSidebarProps) {
             <AvatarFallback>{PROFILE_DEMO.avatarFallback}</AvatarFallback>
           </Avatar>
 
-          <h2 className="mt-4 text-xl font-semibold">{PROFILE_DEMO.displayName}</h2>
-          <p className="text-sm text-muted-foreground">{PROFILE_DEMO.roleTitle}</p>
+          <h2 className="mt-4 text-xl font-semibold">
+            {PROFILE_DEMO.displayName}
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            {PROFILE_DEMO.roleTitle}
+          </p>
 
-          <div className="mt-4 flex flex-wrap justify-center gap-2">
+          {/* <div className="mt-4 flex flex-wrap justify-center gap-2">
             {PROFILE_DEMO.headlineSkills.map((skill) => (
               <Badge key={skill} variant="secondary">
                 {skill}
               </Badge>
             ))}
-          </div>
+          </div> */}
 
           <Button className="mt-6 w-full" asChild>
             <Link href={settingsHref}>Edit profile</Link>

@@ -5,12 +5,8 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import {
-  CheckCircle2,
-  Briefcase,
-  Users,
-  CalendarDays,
-} from "lucide-react";
+import levelBadge from "@/utils/levelBadge";
+import { CheckCircle2, Briefcase, Users, CalendarDays } from "lucide-react";
 
 export default function ProblemDetails() {
   return (
@@ -19,8 +15,7 @@ export default function ProblemDetails() {
         <CardHeader className="space-y-5">
           <div className="flex flex-wrap gap-2">
             <Badge variant="outline">TechCorp Solutions</Badge>
-            <Badge variant="outline">Cloud</Badge>
-            <Badge variant="outline">Infrastructure</Badge>
+            {levelBadge("expert")}
           </div>
 
           <div>
@@ -76,7 +71,7 @@ export default function ProblemDetails() {
         <CardFooter className="border-t">
           <div className="flex items-center gap-2 text-sm text-red-500">
             <CalendarDays className="h-4 w-4" />
-            Submission closes March 30, 2026
+            Submission closes March 30, 2026 at 12:00 PM
           </div>
         </CardFooter>
       </Card>

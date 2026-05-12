@@ -46,6 +46,11 @@ export default function ProblemDetailsAside() {
               <span className="text-muted-foreground">Deadline</span>
               <span className="font-medium">March 30, 2024</span>
             </div>
+
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-muted-foreground">Time</span>
+              <span className="font-medium">12:00 PM</span>
+            </div>
           </div>
         </CardContent>
 

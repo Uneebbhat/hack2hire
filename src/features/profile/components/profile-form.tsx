@@ -66,6 +66,15 @@ export default function ProfileForm({ username }: ProfileFormProps) {
             />
           </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="role">Role</Label>
+            <Input
+              id="role"
+              placeholder="Full-stack developer"
+              defaultValue={PROFILE_DEMO.roleTitle}
+            />
+          </div>
+
           <div className="space-y-2 md:col-span-2">
             <Label htmlFor="bio">Bio</Label>
             <Textarea
