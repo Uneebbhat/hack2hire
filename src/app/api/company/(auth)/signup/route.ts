@@ -1,7 +1,6 @@
-import UserLoginSchema from "@/features/(auth)/schema/user-login-schema.schema";
-import UserDTO from "@/dto/user-dto.dto";
+import CompanySignupSchema from "@/features/company/(auth)/schema/company-signup-schema.schema";
 import { generateAccessToken } from "@/helper/generateToken";
-import { comparePassword } from "@/helper/passwordHashing";
+import { hashPassword } from "@/helper/passwordHashing";
 import prisma from "@/lib/prisma";
 import { APIResponse } from "@/types/response-types";
 import { cookies } from "next/headers";
@@ -13,7 +12,8 @@ export async function POST(req: NextRequest) {
 
     const body = await req.json();
 
-    const validateBody = UserLoginSchema.safeParse(body);
+    // Validate the request body using company schema
+    const validateBody = CompanySignupSchema.safeParse(body);
     if (validateBody.error) {
       return NextResponse.json<APIResponse>(
         {
@@ -25,39 +25,62 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { email, password } = validateBody.data;
+    // Note spelling! The fields must match what prisma expects due to typos in schema.
+    // The field in prisma is 'comapnyName' and 'companyEmail'
+    const { companyName, companyEmail, companyPhone, website, password } =
+      validateBody.data;
 
-    const user = await prisma.user.findUnique({
+    // Check if company email already exists (unique constraint)
+    const emailTaken = await prisma.company.findUnique({
       where: {
-        email,
+        companyEmail,
+      },
+    });
+    if (emailTaken) {
+      return NextResponse.json<APIResponse>(
+        {
+          success: false,
+          status: 409,
+          error: "Email already in use",
+        },
+        {
+          status: 409,
+        },
+      );
+    }
+
+    // Hash password
+    const hashedPassword = await hashPassword(password);
+
+    // Create the company
+    const newCompany = await prisma.company.create({
+      data: {
+        companyName: companyName,
+        companyEmail: companyEmail,
+        companyPhone,
+        website,
+        password: hashedPassword,
       },
     });
 
-    if (!user) {
+    if (!newCompany) {
       return NextResponse.json<APIResponse>(
         {
           success: false,
-          status: 404,
-          error: "Email not found",
+          status: 500,
+          error: "An error occurred while creating your company account",
         },
-        { status: 404 },
+        { status: 500 },
       );
     }
 
-    const passwordMatch = await comparePassword(password, user.password);
-
-    if (!passwordMatch) {
-      return NextResponse.json<APIResponse>(
-        {
-          success: false,
-          status: 401,
-          error: "Invalid email or password",
-        },
-        { status: 401 },
-      );
-    }
-
-    const accessToken = await generateAccessToken(user);
+    // Generate access token (payload can be customized)
+    const accessToken = await generateAccessToken({
+      id: newCompany.id,
+      email: newCompany.companyEmail,
+      name: newCompany.companyName,
+      type: "company",
+    });
 
     cookieStore.set("accessToken", accessToken, {
       httpOnly: true,
@@ -66,19 +89,17 @@ export async function POST(req: NextRequest) {
       path: "/",
     });
 
-    const userDTO = new UserDTO(user);
-
     return NextResponse.json<APIResponse>(
       {
         success: true,
-        status: 200,
-        message: "Logged in successfully",
+        status: 201,
+        message: "Company account created successfully",
         data: {
-          user: userDTO,
+          company: newCompany,
           accessToken,
         },
       },
-      { status: 200 },
+      { status: 201 },
     );
   } catch (error: unknown) {
     if (error instanceof Error) {
