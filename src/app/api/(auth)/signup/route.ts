@@ -84,7 +84,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const accessToken = await generateAccessToken(newUser);
+    const accessToken = await generateAccessToken({
+      id: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+      type: "user",
+    });
 
     cookieStore.set("accessToken", accessToken, {
       httpOnly: true,
