@@ -23,13 +23,19 @@ ENV NODE_ENV=production
 # Build-time placeholders only, never real secrets. Prisma and NextAuth read these
 # at import time, so `next build` fails without them — actual values are injected
 # at deploy time via Vercel Environment Variables, not baked into this image.
-ENV DATABASE_URL="postgresql://hack2hire:hack2hire@postgres:5432/hack2hire?schema=public" \
-  DIRECT_URL="postgresql://hack2hire:hack2hire@postgres:5432/hack2hire?schema=public" \
-  NEXTAUTH_SECRET="build-time-placeholder-not-a-real-secret" \
+
+# --- PRISMA related environment variables and commands commented out for UI-only build ---
+# ENV DATABASE_URL="postgresql://hack2hire:hack2hire@postgres:5432/hack2hire?schema=public" \
+#   DIRECT_URL="postgresql://hack2hire:hack2hire@postgres:5432/hack2hire?schema=public" \
+#   NEXTAUTH_SECRET="build-time-placeholder-not-a-real-secret" \
+#   NEXTAUTH_URL="http://localhost:3000"
+
+ENV NEXTAUTH_SECRET="build-time-placeholder-not-a-real-secret" \
   NEXTAUTH_URL="http://localhost:3000"
+
 COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
-RUN npx prisma generate
+# RUN npx prisma generate   # <-- Commented out for UI-only build
 RUN --mount=type=cache,target=/app/.next/cache npm run build
 
 FROM node:${NODE_VERSION}-bookworm-slim AS runner
