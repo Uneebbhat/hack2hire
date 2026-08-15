@@ -1,0 +1,32 @@
+name: hack2hire
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: hack2hire-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-hack2hire-db}
+      POSTGRES_USER: ${POSTGRES_USER:-hack2hire-user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hack2hire-password}
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - hack2hire_postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-hack2hire-user} -d ${POSTGRES_DB:-hack2hire-db}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+volumes:
+  hack2hire_postgres_data:
